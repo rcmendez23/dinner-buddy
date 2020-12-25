@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}Dinner Buddy Meal Planner{% endblock %}
+
+{% block head %}
+    {#    <style>#}
+    {#        .column {#}
+    {#            height: 80vh;#}
+    {#        }#}
+    {#    </style>#}
+{% endblock %}
+
+{% block content %}
+    <div class="justify-content-center"><h1>Dinner Buddy Meal Planner</h1></div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h4>Options</h4>
+                <div>
+                    <form action="#" method="POST">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <label>Days of Week</label>
+                            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                                <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="btncheck1">Sun</label>
+
+                                <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="btncheck2">Mon</label>
+
+                                <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="btncheck3">Tue</label>
+
+                                <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="btncheck4">Wed</label>
+
+                                <input type="checkbox" class="btn-check" id="btncheck5" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="btncheck5">Thur</label>
+
+                                <input type="checkbox" class="btn-check" id="btncheck6" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="btncheck6">Fri</label>
+
+                                <input type="checkbox" class="btn-check" id="btncheck7" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="btncheck7">Sat</label>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="submit"
+                                    class="btn btn-success">
+                                Go
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col"><h4>Recipes</h4>
+                {% if state == "no_results" %}
+                    <p>Your recipes will display here</p>
+                {% endif %}
+                {% if state == "show_results" %}
+                    <p>{{ detailed_recipe.name }}</p>
+                {% endif %}
+            </div>
+            <div class="col"><h4>Grocery List</h4></div>
+        </div>
+    </div>
+
+{% endblock %}
