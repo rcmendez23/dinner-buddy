@@ -22,27 +22,50 @@
                         <div class="form-row">
                             <label>Days of Week</label>
                             <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-                                <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
+                                <input name="days_of_week" value="Sunday" type="checkbox" class="btn-check"
+                                       id="btncheck1" autocomplete="off">
                                 <label class="btn btn-outline-primary" for="btncheck1">Sun</label>
 
-                                <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
+                                <input name="days_of_week" value="Monday" type="checkbox" class="btn-check"
+                                       id="btncheck2" autocomplete="off">
                                 <label class="btn btn-outline-primary" for="btncheck2">Mon</label>
 
-                                <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
+                                <input name="days_of_week" value="Tuesday" type="checkbox" class="btn-check"
+                                       id="btncheck3" autocomplete="off">
                                 <label class="btn btn-outline-primary" for="btncheck3">Tue</label>
 
-                                <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off">
+                                <input name="days_of_week" value="Wednesday" type="checkbox" class="btn-check"
+                                       id="btncheck4" autocomplete="off">
                                 <label class="btn btn-outline-primary" for="btncheck4">Wed</label>
 
-                                <input type="checkbox" class="btn-check" id="btncheck5" autocomplete="off">
+                                <input name="days_of_week" value="Thursday" type="checkbox" class="btn-check"
+                                       id="btncheck5" autocomplete="off">
                                 <label class="btn btn-outline-primary" for="btncheck5">Thur</label>
 
-                                <input type="checkbox" class="btn-check" id="btncheck6" autocomplete="off">
+                                <input name="days_of_week" value="Friday" type="checkbox" class="btn-check"
+                                       id="btncheck6" autocomplete="off">
                                 <label class="btn btn-outline-primary" for="btncheck6">Fri</label>
 
-                                <input type="checkbox" class="btn-check" id="btncheck7" autocomplete="off">
+                                <input name="days_of_week" value="Saturday" type="checkbox" class="btn-check"
+                                       id="btncheck7" autocomplete="off">
                                 <label class="btn btn-outline-primary" for="btncheck7">Sat</label>
                             </div>
+                        </div>
+                        <div class="form-row">
+                            <label>Max prep time</label>
+                            <select name="max_prep_time">
+                                <option value="SHORT">Short</option>
+                                <option value="MEDIUM">Medium</option>
+                                <option value="LONG">Long</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <label>Ingredients Included</label>
+                            <input name="ingredients_included" type="text">
+                        </div>
+                        <div class="form-row">
+                            <label>Ingredients Excluded</label>
+                            <input name="ingredients_excluded" type="text">
                         </div>
                         <div>
                             <button type="submit"
@@ -58,7 +81,11 @@
                     <p>Your recipes will display here</p>
                 {% endif %}
                 {% if state == "show_results" %}
-                    <p>{{ detailed_recipe.name }}</p>
+                    {% for entry in days_to_recipes %}
+                        <h6>{{ entry.0 }}</h6>
+                        <p>{{ entry.1.name }}</p>
+                        <p class="text-muted">{{ entry.1.description }}</p>
+                    {% endfor %}
                 {% endif %}
             </div>
             <div class="col"><h4>Grocery List</h4></div>

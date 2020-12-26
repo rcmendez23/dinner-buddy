@@ -32,7 +32,11 @@ class AllRecipes(object):
         articles = soup.findAll("article", {"class": "fixed-recipe-card"})
 
         iterarticles = iter(articles)
-        next(iterarticles)
+        try:
+            next(iterarticles)
+        except StopIteration as e:
+            print(e)
+
         for article in iterarticles:
             data = {}
             try:
