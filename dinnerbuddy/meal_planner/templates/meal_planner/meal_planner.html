@@ -2,12 +2,8 @@
 
 {% block title %}Dinner Buddy Meal Planner{% endblock %}
 
-{% block head %}
-    {#    <style>#}
-    {#        .column {#}
-    {#            height: 80vh;#}
-    {#        }#}
-    {#    </style>#}
+{% block extrahead %}
+    {{ form.media }}
 {% endblock %}
 
 {% block content %}
@@ -53,11 +49,11 @@
                         </div>
                         <div class="form-row">
                             <label>Max prep time</label>
-                            <select name="max_prep_time">
-                                <option value="SHORT">Short</option>
-                                <option value="MEDIUM">Medium</option>
-                                <option value="LONG">Long</option>
-                            </select>
+                            {{ options_form.max_prep_time }}
+                        </div>
+                        <div>
+                            <label>Dietary restrictions</label>
+                            {{ options_form.dietary_restrictions }}
                         </div>
                         <div class="form-row">
                             <label>Ingredients Included</label>
@@ -66,6 +62,10 @@
                         <div class="form-row">
                             <label>Ingredients Excluded</label>
                             <input name="ingredients_excluded" type="text">
+                        </div>
+                        <div>
+                            <label>Instant Pot?</label>
+                            {{ options_form.instant_pot }}
                         </div>
                         <div>
                             <button type="submit"
