@@ -17,6 +17,18 @@
             color: white;
         }
 
+        .recipe-img {
+            height: inherit;
+        }
+
+        .recipe-card {
+            margin-bottom: 1rem;
+        }
+
+        .panel {
+            height: 150vh;
+        }
+
 
     </style>
 {% endblock %}
@@ -94,7 +106,7 @@
                 </div>
             </div>
             <div class="planner-column col-5">
-                <div class="panel">
+                <div class="panel recipe-panel">
                     <div class="panel-header">
                         <div class="panel-title h4">Recipes</div>
                     </div>
@@ -104,9 +116,22 @@
                         {% endif %}
                         {% if state == "show_results" %}
                             {% for entry in days_to_recipes %}
-                                <h6>{{ entry.0 }}</h6>
-                                <p>{{ entry.1.name }}</p>
-                                <p class="text-muted">{{ entry.1.description }}</p>
+                                <div class="card recipe-card">
+                                    <div class="card-header">
+                                        <div class="card-title h5">{{ entry.1.name }}</div>
+                                        <div class="card-subtitle text-gray">{{ entry.0 }}</div>
+                                    </div>
+                                    <div class="card-image">
+                                        <img src="{{ entry.1.image_and_metadata.url }}"
+                                             class="recipe-img img-responsive">
+                                    </div>
+                                    <div class="card-body">
+                                        {{ entry.1.description }}
+                                    </div>
+                                    <div class="card-footer">
+                                        <a target="_blank" href="{{ entry.1.url }}">See full recipe</a>
+                                    </div>
+                                </div>
                             {% endfor %}
                         {% endif %}
                     </div>
