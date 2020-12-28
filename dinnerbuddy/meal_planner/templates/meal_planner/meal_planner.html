@@ -112,7 +112,16 @@
                     </div>
                     <div class="panel-body">
                         {% if state == "no_results" %}
-                            <p>Your recipes will display here</p>
+                            <div class="empty">
+                                <div class="empty-icon">
+                                    <i data-feather="coffee"></i>
+                                </div>
+                                <p class="empty-title h5">Your delicious recipes will display here</p>
+                                <p class="empty-subtitle">Select the options on the right to start cookin'</p>
+                                <div class="empty-action">
+                                    <button class="btn btn-primary">Show me how</button>
+                                </div>
+                            </div>
                         {% endif %}
                         {% if state == "show_results" %}
                             {% for entry in days_to_recipes %}
