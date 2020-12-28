@@ -46,8 +46,8 @@ class AllRecipes(object):
                 data["url"] = article.find("a", href=re.compile('^https://www.allrecipes.com/recipe/'))['href']
                 try:
                     data["image"] = \
-                    article.find("a", href=re.compile('^https://www.allrecipes.com/recipe/')).find("img")[
-                        "data-original-src"]
+                        article.find("a", href=re.compile('^https://www.allrecipes.com/recipe/')).find("img")[
+                            "data-original-src"]
                 except Exception as e1:
                     pass
                 try:
@@ -78,7 +78,8 @@ class AllRecipes(object):
         soup = BeautifulSoup(html_content, 'html.parser')
 
         script_tag = soup.find("script", {"type": "application/ld+json"})
-        inner_json_string = str(script_tag).replace("<script type=\"application/ld+json\">", "").replace("</script>", "")
+        inner_json_string = str(script_tag).replace("<script type=\"application/ld+json\">", "").replace("</script>",
+                                                                                                         "")
         json_data = json.loads(inner_json_string)
         recipe_data = json_data[1]
         name = recipe_data["name"]
@@ -104,7 +105,8 @@ class AllRecipes(object):
             "description": description,
             "yield": recipe_yield,
             "nutrition": nutrition,
-            "image_and_metadata": image_and_metadata
+            "image_and_metadata": image_and_metadata,
+            "url": url,
         }
 
         return data

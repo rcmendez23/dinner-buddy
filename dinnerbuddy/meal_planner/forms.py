@@ -14,9 +14,15 @@ class OptionsForm(forms.Form):
         ("kosher", "kosher"),
         ("halal", "halal"),
         ("paleo", "paleo"))
-    days_of_week = forms.CharField(label='Meal Days', max_length=100)
-    max_prep_time = forms.ChoiceField(choices=PREP_TIMES, required=False)
-    dietary_restrictions = forms.MultipleChoiceField(choices=DIETARY_RESTRICTIONS, required=False)
-    instant_pot = forms.BooleanField(label="Instant Pot?", required=False)
-    ingredients_included = forms.CharField(label='Ingredients Included', max_length=1000, required=False)
-    ingredients_excluded = forms.CharField(label='Ingredients Excluded', max_length=1000, required=False)
+    days_of_week = forms.CharField(label='Meal Days', max_length=100,
+                                   widget=forms.TextInput(attrs={'class': 'form-input'}))
+    max_prep_time = forms.ChoiceField(choices=PREP_TIMES, required=False,
+                                      widget=forms.Select(attrs={'class': 'form-select'}))
+    dietary_restrictions = forms.MultipleChoiceField(choices=DIETARY_RESTRICTIONS, required=False,
+                                                     widget=forms.SelectMultiple(attrs={'class': 'form-select'}))
+    instant_pot = forms.BooleanField(label="Instant Pot?", required=False,
+                                     widget=forms.CheckboxInput(attrs={'class': 'form-switch'}))
+    ingredients_included = forms.CharField(label='Ingredients Included', max_length=1000, required=False,
+                                           widget=forms.TextInput(attrs={'class': 'form-input'}))
+    ingredients_excluded = forms.CharField(label='Ingredients Excluded', max_length=1000, required=False,
+                                           widget=forms.TextInput(attrs={'class': 'form-input'}))

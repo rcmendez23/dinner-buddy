@@ -3,92 +3,156 @@
 {% block title %}Dinner Buddy Meal Planner{% endblock %}
 
 {% block extrahead %}
-    {{ form.media }}
+    <style>
+        .planner-column {
+            padding: .4rem;
+        }
+
+        .day-of-week-check {
+            display: none;
+        }
+
+        .day-of-week-check:checked + label {
+            background: #5755d9;
+            color: white;
+        }
+
+        .recipe-img {
+            height: inherit;
+        }
+
+        .recipe-card {
+            margin-bottom: 1rem;
+        }
+
+        .panel {
+            height: 150vh;
+        }
+
+
+    </style>
 {% endblock %}
 
 {% block content %}
-    <div class="justify-content-center"><h1>Dinner Buddy Meal Planner</h1></div>
     <div class="container">
-        <div class="row">
-            <div class="col">
-                <h4>Options</h4>
-                <div>
-                    <form action="#" method="POST">
-                        {% csrf_token %}
-                        <div class="form-row">
-                            <label>Days of Week</label>
-                            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-                                <input name="days_of_week" value="Sunday" type="checkbox" class="btn-check"
-                                       id="btncheck1" autocomplete="off">
-                                <label class="btn btn-outline-primary" for="btncheck1">Sun</label>
-
-                                <input name="days_of_week" value="Monday" type="checkbox" class="btn-check"
-                                       id="btncheck2" autocomplete="off">
-                                <label class="btn btn-outline-primary" for="btncheck2">Mon</label>
-
-                                <input name="days_of_week" value="Tuesday" type="checkbox" class="btn-check"
-                                       id="btncheck3" autocomplete="off">
-                                <label class="btn btn-outline-primary" for="btncheck3">Tue</label>
-
-                                <input name="days_of_week" value="Wednesday" type="checkbox" class="btn-check"
-                                       id="btncheck4" autocomplete="off">
-                                <label class="btn btn-outline-primary" for="btncheck4">Wed</label>
-
-                                <input name="days_of_week" value="Thursday" type="checkbox" class="btn-check"
-                                       id="btncheck5" autocomplete="off">
-                                <label class="btn btn-outline-primary" for="btncheck5">Thur</label>
-
-                                <input name="days_of_week" value="Friday" type="checkbox" class="btn-check"
-                                       id="btncheck6" autocomplete="off">
-                                <label class="btn btn-outline-primary" for="btncheck6">Fri</label>
-
-                                <input name="days_of_week" value="Saturday" type="checkbox" class="btn-check"
-                                       id="btncheck7" autocomplete="off">
-                                <label class="btn btn-outline-primary" for="btncheck7">Sat</label>
+        <div class="columns">
+            <div class="planner-column col-4">
+                <div class="panel">
+                    <div class="panel-header">
+                        <div class="panel-title h4">Options</div>
+                    </div>
+                    <div class="panel-body">
+                        <form action="#" method="POST">
+                            {% csrf_token %}
+                            <div>
+                                <label>Days of Week</label>
+                                <div class="form-group" role="group" aria-label="Basic checkbox toggle button group">
+                                    <input name="days_of_week" value="Sunday" class="day-of-week-check" type="checkbox"
+                                           id="btncheck1">
+                                    <label class="btn btn-check" for="btncheck1">Sun</label>
+                                    <input name="days_of_week" value="Monday" class="day-of-week-check" type="checkbox"
+                                           id="btncheck2">
+                                    <label class="btn btn-check" for="btncheck2">Mon</label>
+                                    <input name="days_of_week" value="Tuesday" class="day-of-week-check" type="checkbox"
+                                           id="btncheck3">
+                                    <label class="btn btn-outline-primary" for="btncheck3">Tue</label>
+                                    <input name="days_of_week" value="Wednesday" class="day-of-week-check"
+                                           type="checkbox"
+                                           id="btncheck4">
+                                    <label class="btn btn-outline-primary" for="btncheck4">Wed</label>
+                                    <input name="days_of_week" value="Thursday" class="day-of-week-check"
+                                           type="checkbox"
+                                           id="btncheck5">
+                                    <label class="btn btn-outline-primary" for="btncheck5">Thur</label>
+                                    <input name="days_of_week" value="Friday" class="day-of-week-check" type="checkbox"
+                                           id="btncheck6">
+                                    <label class="btn btn-outline-primary" for="btncheck6">Fri</label>
+                                    <input name="days_of_week" value="Saturday" class="day-of-week-check"
+                                           type="checkbox"
+                                           id="btncheck7">
+                                    <label class="btn btn-outline-primary" for="btncheck7">Sat</label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-row">
-                            <label>Max prep time</label>
-                            {{ options_form.max_prep_time }}
-                        </div>
-                        <div>
-                            <label>Dietary restrictions</label>
-                            {{ options_form.dietary_restrictions }}
-                        </div>
-                        <div class="form-row">
-                            <label>Ingredients Included</label>
-                            <input name="ingredients_included" type="text">
-                        </div>
-                        <div class="form-row">
-                            <label>Ingredients Excluded</label>
-                            <input name="ingredients_excluded" type="text">
-                        </div>
-                        <div>
-                            <label>Instant Pot?</label>
-                            {{ options_form.instant_pot }}
-                        </div>
-                        <div>
-                            <button type="submit"
-                                    class="btn btn-success">
-                                Go
-                            </button>
-                        </div>
-                    </form>
+                            <div class="form-group">
+                                <label class="form-label">Max prep time</label>
+                                {{ options_form.max_prep_time }}
+                            </div>
+                            <div>
+                                <label>Dietary restrictions</label>
+                                {{ options_form.dietary_restrictions }}
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Ingredients Included</label>
+                                {{ options_form.ingredients_included }}
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Ingredients Excluded</label>
+                                {{ options_form.ingredients_excluded }}
+                            </div>
+                            <div class="form-group">
+                                <label class="form-switch">
+                                    <input name="instant_pot" type="checkbox">
+                                    <i class="form-icon"></i> Instant Pot?
+                                </label>
+                            </div>
+                            <div class="panel-footer">
+                                <button type="submit"
+                                        class="btn">
+                                    Go
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-            <div class="col"><h4>Recipes</h4>
-                {% if state == "no_results" %}
-                    <p>Your recipes will display here</p>
-                {% endif %}
-                {% if state == "show_results" %}
-                    {% for entry in days_to_recipes %}
-                        <h6>{{ entry.0 }}</h6>
-                        <p>{{ entry.1.name }}</p>
-                        <p class="text-muted">{{ entry.1.description }}</p>
-                    {% endfor %}
-                {% endif %}
+            <div class="planner-column col-5">
+                <div class="panel recipe-panel">
+                    <div class="panel-header">
+                        <div class="panel-title h4">Recipes</div>
+                    </div>
+                    <div class="panel-body">
+                        {% if state == "no_results" %}
+                            <div class="empty">
+                                <div class="empty-icon">
+                                    <i data-feather="coffee"></i>
+                                </div>
+                                <p class="empty-title h5">Your delicious recipes will display here</p>
+                                <p class="empty-subtitle">Select the options on the right to start cookin'</p>
+                                <div class="empty-action">
+                                    <button class="btn btn-primary">Show me how</button>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if state == "show_results" %}
+                            {% for entry in days_to_recipes %}
+                                <div class="card recipe-card">
+                                    <div class="card-header">
+                                        <div class="card-title h5">{{ entry.1.name }}</div>
+                                        <div class="card-subtitle text-gray">{{ entry.0 }}</div>
+                                    </div>
+                                    <div class="card-image">
+                                        <img src="{{ entry.1.image_and_metadata.url }}"
+                                             class="recipe-img img-responsive">
+                                    </div>
+                                    <div class="card-body">
+                                        {{ entry.1.description }}
+                                    </div>
+                                    <div class="card-footer">
+                                        <a target="_blank" href="{{ entry.1.url }}">See full recipe</a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
             </div>
-            <div class="col"><h4>Grocery List</h4></div>
+            <div class="planner-column col-3">
+                <div class="panel">
+                    <div class="panel-header">
+                        <div class="panel-title h4">Grocery List</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
