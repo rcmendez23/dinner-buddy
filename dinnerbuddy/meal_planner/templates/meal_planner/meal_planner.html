@@ -117,7 +117,7 @@
                                     <i data-feather="coffee"></i>
                                 </div>
                                 <p class="empty-title h5">Your delicious recipes will display here</p>
-                                <p class="empty-subtitle">Select the options on the right to start cookin'</p>
+                                <p class="empty-subtitle">Select the options on the left to start cookin'</p>
                                 <div class="empty-action">
                                     <button class="btn btn-primary">Show me how</button>
                                 </div>
@@ -147,9 +147,39 @@
                 </div>
             </div>
             <div class="planner-column col-3">
-                <div class="panel">
+                <div class="panel grocery-list-panel">
                     <div class="panel-header">
-                        <div class="panel-title h4">Grocery List</div>
+                        <div class="panel-title h4">Grocery Lists</div>
+                    </div>
+                    <div class="panel-body">
+                        {% if state == "no_results" %}
+                            <div class="empty">
+                                <div class="empty-icon">
+                                    <i data-feather="coffee"></i>
+                                </div>
+                                <p class="empty-title h5">Your grocery list will display here</p>
+                                <p class="empty-subtitle">Select the options on the left to start cookin'</p>
+                                <div class="empty-action">
+                                    <button class="btn btn-primary">Show me how</button>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if state == "show_results" %}
+                            {% for entry in days_to_recipes %}
+                                <div class="card recipe-card">
+                                    <div class="card-header">
+                                        <div class="card-title h5">{{ entry.1.name }}</div>
+                                        <div class="card-subtitle text-gray">{{ entry.0 }}</div>
+                                    </div>
+
+                                    <div class="card-body">
+                                        {% for ing in entry.1.ingredients %}
+                                            {{ ing }}<br>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
             </div>
