@@ -12,7 +12,6 @@ class OptionsForm(forms.Form):
         ("dairy free", "dairy free"),
         ("gluten free", "gluten free"),
         ("kosher", "kosher"),
-        ("halal", "halal"),
         ("paleo", "paleo"))
     days_of_week = forms.CharField(label='Meal Days', max_length=100,
                                    widget=forms.TextInput(attrs={'class': 'form-input'}))
