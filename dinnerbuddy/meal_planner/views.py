@@ -4,11 +4,11 @@ from .forms import OptionsForm
 import random
 
 NON_DINNER_KEYWORDS = ['choco', 'cookie', 'muffin', 'brownie', 'cake', 'meringue', 'biscuit', 'scone', 'tiramisu',
-                       'caramel', 'popcorn', 'fill', 'guac', 'gravy', 'sauce', 'salsa', 'pudding', 'seasoning',
-                       'edamame', 'fruit', 'banana', 'bread', 'bars', 'margarita', 'coffee', 'cider', 'smoothie',
-                       'ice cream', 'crisps']
+                       'caramel', 'popcorn', 'fill', 'guac', 'gravy', 'sauce', 'salsa', 'pesto', 'pudding', 'seasoning',
+                       'edamame', 'fruit', 'banana', 'bread', 'bar', 'margarita', 'sangria', 'coffee', 'cider', 'smoothie',
+                       'ice cream', 'crisps', 'apple pie']
 
-                      
+
 def dinner_recipe(recipe_name):
     recipe_name = recipe_name.lower()
     keywords_in_name = list(filter(lambda x: x in recipe_name, NON_DINNER_KEYWORDS))
