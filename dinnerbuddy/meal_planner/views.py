@@ -1,6 +1,17 @@
 from django.shortcuts import render
 from AllRecipes.AllRecipes import AllRecipes
 from .forms import OptionsForm
+import random
+
+NON_DINNER_KEYWORDS = ['choco', 'cookie', 'muffin', 'brownie', 'cake', 'meringue', 'biscuit', 'fill', 'guac', 'gravy',
+                       'sauce', 'edamame']
+
+
+def dinner_recipe(recipe_name):
+    recipe_name = recipe_name.lower()
+    print(recipe_name)
+    keywords_in_name = list(filter(lambda x: x in recipe_name, NON_DINNER_KEYWORDS))
+    return len(keywords_in_name) == 0
 
 
 def meal_planner(request):
@@ -25,21 +36,29 @@ def meal_planner(request):
 
             query_options = {
                 "wt": ",".join(keywords),  # Query keywords
-                "ingIncl": ingredients_included,  # 'Must be included' ingrdients (optional)
+                "ingIncl": ingredients_included,  # 'Must be included' ingredients (optional)
                 "ingExcl": ingredients_excluded,  # 'Must not be included' ingredients (optional)
                 "sort": "re"  # Sorting options : 're' for relevance, 'ra' for rating, 'p' for popular (optional)
             }
             query_result = AllRecipes.search(query_options)
 
-            days_to_recipes = []  # array of (day, recipe) tuples
+            recipes = []
 
             # Get :
             num_meals = len(days_of_week)
-            for i in range(num_meals):
+            i = 0
+            count = 0
+            while count < num_meals:
                 main_recipe_url = query_result[i]['url']
-                recipe = AllRecipes.get(
-                    main_recipe_url)
-                days_to_recipes.append((days_of_week[i], recipe))
+                recipe = AllRecipes.get(main_recipe_url)
+                if dinner_recipe(recipe["name"]):
+                    recipes.append(recipe)
+                    count += 1
+                i += 1
+
+            random.shuffle(recipes)
+
+            days_to_recipes = [(days_of_week[i], recipes[i]) for i in range(num_meals)]  # array of (day, recipe) tuples
 
             return render(request, "meal_planner/meal_planner.html",
                           context={"state": "show_results", "options_form": options_form,
