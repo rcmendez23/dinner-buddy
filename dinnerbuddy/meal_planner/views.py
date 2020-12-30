@@ -3,9 +3,11 @@ from AllRecipes.AllRecipes import AllRecipes
 from .forms import OptionsForm
 import random
 
-NON_DINNER_KEYWORDS = ['choco', 'cookie', 'muffin', 'brownie', 'cake', 'meringue', 'biscuit', 'fill', 'guac', 'gravy',
-                       'sauce', 'edamame']
+NON_DINNER_KEYWORDS = ['choco', 'cookie', 'muffin', 'brownie', 'cake', 'meringue', 'biscuit', 'scone', 'tiramisu',
+                       'caramel', 'popcorn', 'fill', 'guac', 'gravy', 'sauce', 'seasoning', 'edamame', 'fruit',
+                       'banana', 'bread', 'bars', 'margarita']
 
+# shuffle the is
 
 def dinner_recipe(recipe_name):
     recipe_name = recipe_name.lower()
