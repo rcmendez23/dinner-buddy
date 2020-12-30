@@ -4,14 +4,13 @@ from .forms import OptionsForm
 import random
 
 NON_DINNER_KEYWORDS = ['choco', 'cookie', 'muffin', 'brownie', 'cake', 'meringue', 'biscuit', 'scone', 'tiramisu',
-                       'caramel', 'popcorn', 'fill', 'guac', 'gravy', 'sauce', 'seasoning', 'edamame', 'fruit',
-                       'banana', 'bread', 'bars', 'margarita']
+                       'caramel', 'popcorn', 'fill', 'guac', 'gravy', 'sauce', 'salsa', 'pudding', 'seasoning',
+                       'edamame', 'fruit', 'banana', 'bread', 'bars', 'margarita', 'coffee', 'smoothie', 'ice cream',
+                       'crisps']
 
-# shuffle the is
 
 def dinner_recipe(recipe_name):
     recipe_name = recipe_name.lower()
-    print(recipe_name)
     keywords_in_name = list(filter(lambda x: x in recipe_name, NON_DINNER_KEYWORDS))
     return len(keywords_in_name) == 0
 
@@ -51,6 +50,7 @@ def meal_planner(request):
             i = 0
             count = 0
             while count < num_meals:
+                print('i', i)
                 main_recipe_url = query_result[i]['url']
                 recipe = AllRecipes.get(main_recipe_url)
                 if dinner_recipe(recipe["name"]):

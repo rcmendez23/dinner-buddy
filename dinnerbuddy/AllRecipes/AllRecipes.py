@@ -8,6 +8,10 @@ import json
 
 import re
 
+import random
+
+MAX_PAGE = 10
+
 
 class AllRecipes(object):
 
@@ -19,7 +23,9 @@ class AllRecipes(object):
         base_url = "https://allrecipes.com/search/results/?"
         query_url = urllib.parse.urlencode(query_dict)
 
-        url = base_url + query_url
+        page_shuffle = '&page=' + str(random.randint(1, MAX_PAGE))
+
+        url = base_url + query_url + page_shuffle
 
         req = urllib.request.Request(url)
         req.add_header('Cookie', 'euConsent=true')
@@ -30,7 +36,6 @@ class AllRecipes(object):
         soup = BeautifulSoup(html_content, 'html.parser')
 
 
-        #< article class ="grid-col--fixed-tiles video-card" >
         search_data = []
         articles = soup.findAll("article", {"class": "fixed-recipe-card"})
 
