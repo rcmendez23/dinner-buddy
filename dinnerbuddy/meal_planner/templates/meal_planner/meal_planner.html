@@ -3,6 +3,9 @@
 {% block title %}Dinner Buddy Meal Planner{% endblock %}
 
 {% block extrahead %}
+    {% load static %}
+    <script src="{% static "meal_planner/meal_planner.js" %}"></script>
+    <script src="{% static "meal_planner/form_chip_input.js" %}"></script>
     <style>
         .planner-column {
             padding: .4rem;
@@ -28,7 +31,6 @@
         .panel {
             height: 150vh;
         }
-
 
     </style>
 {% endblock %}
@@ -82,12 +84,22 @@
                                 {{ options_form.dietary_restrictions }}
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Ingredients Included</label>
-                                {{ options_form.ingredients_included }}
+                                <label class="form-label" for="ingExcl">Ingredients Included</label>
+                                <div class="form-autocomplete">
+                                    <div class="form-autocomplete-input form-input">
+                                        <input name="ingredients_included" id="ingExcl" class="form-input form-chip-input" type="text"
+                                               placeholder="typing here">
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Ingredients Excluded</label>
-                                {{ options_form.ingredients_excluded }}
+                                <label class="form-label" for="ingExcl">Ingredients Excluded</label>
+                                <div class="form-autocomplete">
+                                    <div class="form-autocomplete-input form-input">
+                                        <input name="ingredients_excluded" id="ingExcl" class="form-input form-chip-input" type="text"
+                                               placeholder="typing here">
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="form-switch">
@@ -97,6 +109,7 @@
                             </div>
                             <div class="panel-footer">
                                 <button type="submit"
+                                        id="options-form-submit"
                                         class="btn">
                                     Go
                                 </button>
