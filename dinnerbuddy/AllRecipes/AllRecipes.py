@@ -32,9 +32,7 @@ class AllRecipes(object):
 
         html_content = urllib.request.urlopen(req).read()
 
-
         soup = BeautifulSoup(html_content, 'html.parser')
-
 
         search_data = []
         articles = soup.findAll("article", {"class": "fixed-recipe-card"})

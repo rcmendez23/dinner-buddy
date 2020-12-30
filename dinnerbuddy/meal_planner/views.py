@@ -50,7 +50,6 @@ def meal_planner(request):
             i = 0
             count = 0
             while count < num_meals:
-                print('i', i)
                 main_recipe_url = query_result[i]['url']
                 recipe = AllRecipes.get(main_recipe_url)
                 if dinner_recipe(recipe["name"]):
