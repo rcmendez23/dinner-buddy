@@ -44,6 +44,8 @@ def meal_planner(request):
             }
             query_result = AllRecipes.search(query_options)
 
+            random.shuffle(query_result)
+
             recipes = []
 
             # Get recipe data
@@ -55,8 +57,6 @@ def meal_planner(request):
                 recipe = AllRecipes.get(url)
                 if is_dinner_recipe(recipe["name"]):
                     recipes.append(recipe)
-
-            random.shuffle(recipes)
 
             days_to_recipes = [(days_of_week[i], recipes[i]) for i in range(num_meals)]  # array of (day, recipe) tuples
 
