@@ -49,15 +49,10 @@ class AllRecipes(object):
                         article.find("a", href=re.compile('^https://www.allrecipes.com/recipe/')).find("img")[
                             "data-original-src"]
                 except Exception as e1:
-                    pass
-                try:
-                    data["rating"] = float(
-                        article.find("div", {"class": "fixed-recipe-card__ratings"}).find("span")["data-ratingstars"])
-                except ValueError:
-                    data["rating"] = None
+                    print(e1)
             except Exception as e2:
-                pass
-            if data and "image" in data:  # Do not include if no image -> its probably an add or something you do not want in your result
+                print(e2)
+            if data and "image" in data:  # Do not include if no image, could be an ad
                 search_data.append(data)
 
         return search_data
@@ -82,17 +77,27 @@ class AllRecipes(object):
                                                                                                          "")
         json_data = json.loads(inner_json_string)
         recipe_data = json_data[1]
-        name = recipe_data["name"]
-        image_and_metadata = recipe_data["image"]
-        description = recipe_data["description"]
-        prep_time = recipe_data["prepTime"]
-        cook_time = recipe_data["cookTime"]
-        total_time = recipe_data["totalTime"]
-        recipe_yield = recipe_data["recipeYield"]
-        ingredients = recipe_data["recipeIngredient"]
-        instructions = recipe_data["recipeInstructions"]
-        rating = recipe_data["aggregateRating"]["ratingValue"]
-        nutrition = recipe_data["nutrition"]
+
+        # required data
+        name = recipe_data.get("name", None)
+        if not name:
+            raise MissingRecipeDataError("Name for recipe was not found.")
+        ingredients = recipe_data.get("recipeIngredient", None)
+        if not ingredients:
+            raise MissingRecipeDataError("Ingredients for recipe were not found.")
+        total_time = recipe_data.get("totalTime", None)
+        if not total_time:
+            raise MissingRecipeDataError("Total time for recipe was not found.")
+
+        # optional data
+        image_and_metadata = recipe_data.get("image", None)
+        description = recipe_data.get("description", None)
+        prep_time = recipe_data.get("prepTime", None)
+        cook_time = recipe_data.get("cookTime", None)
+        recipe_yield = recipe_data.get("recipeYield", None)
+        instructions = recipe_data.get("recipeInstructions", None)
+        rating = recipe_data.get("aggregateRating", None).get("ratingValue", None)
+        nutrition = recipe_data.get("nutrition", None)
 
         data = {
             "rating": rating,
@@ -110,3 +115,7 @@ class AllRecipes(object):
         }
 
         return data
+
+
+class MissingRecipeDataError(RuntimeError):
+    pass
