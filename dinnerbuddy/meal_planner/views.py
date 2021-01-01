@@ -9,7 +9,7 @@ NON_DINNER_KEYWORDS = ['choco', 'cookie', 'muffin', 'brownie', 'cake', 'meringue
                        'ice cream', 'crisps', 'apple pie']
 
 
-def dinner_recipe(recipe_name):
+def is_dinner_recipe(recipe_name):
     recipe_name = recipe_name.lower()
     keywords_in_name = list(filter(lambda x: x in recipe_name, NON_DINNER_KEYWORDS))
     return len(keywords_in_name) == 0
