@@ -5,7 +5,8 @@ import random
 
 NON_DINNER_KEYWORDS = ['choco', 'cookie', 'muffin', 'brownie', 'cake', 'meringue', 'biscuit', 'scone', 'tiramisu',
                        'caramel', 'popcorn', 'fill', 'guac', 'gravy', 'sauce', 'salsa', 'pesto', 'pudding', 'seasoning',
-                       'edamame', 'fruit', 'banana', 'bread', 'bar', 'margarita', 'sangria', 'coffee', 'cider', 'smoothie',
+                       'edamame', 'fruit', 'banana', 'bread', 'bar', 'margarita', 'sangria', 'coffee', 'cider',
+                       'smoothie',
                        'ice cream', 'crisps', 'apple pie']
 
 
@@ -45,23 +46,15 @@ def meal_planner(request):
 
             recipes = []
 
-            # Get :
+            # Get recipe data
             num_meals = len(days_of_week)
-           for result in query_result:
+            for result in query_result:
                 if len(recipes) >= num_meals:
                     break
                 url = result['url']
                 recipe = AllRecipes.get(url)
                 if is_dinner_recipe(recipe["name"]):
                     recipes.append(recipe)
-            count = 0
-            while count < num_meals:
-                main_recipe_url = query_result[i]['url']
-                recipe = AllRecipes.get(main_recipe_url)
-                if is_dinner_recipe(recipe["name"]):
-                    recipes.append(recipe)
-                    count += 1
-                i += 1
 
             random.shuffle(recipes)
 
