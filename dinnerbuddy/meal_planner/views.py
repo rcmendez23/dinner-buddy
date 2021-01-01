@@ -58,7 +58,7 @@ def meal_planner(request):
             while count < num_meals:
                 main_recipe_url = query_result[i]['url']
                 recipe = AllRecipes.get(main_recipe_url)
-                if dinner_recipe(recipe["name"]):
+                if is_dinner_recipe(recipe["name"]):
                     recipes.append(recipe)
                     count += 1
                 i += 1
