@@ -47,7 +47,13 @@ def meal_planner(request):
 
             # Get :
             num_meals = len(days_of_week)
-            i = 0
+           for result in query_result:
+                if len(recipes) >= num_meals:
+                    break
+                url = result['url']
+                recipe = AllRecipes.get(url)
+                if is_dinner_recipe(recipe["name"]):
+                    recipes.append(recipe)
             count = 0
             while count < num_meals:
                 main_recipe_url = query_result[i]['url']
