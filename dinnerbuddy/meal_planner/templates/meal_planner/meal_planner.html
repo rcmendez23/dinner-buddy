@@ -44,6 +44,11 @@
                     <div class="panel-body">
                         <form action="#" method="POST">
                             {% csrf_token %}
+                            {% if error %}
+                                <div class="toast toast-warning">
+                                    {{ error }}
+                                </div>
+                            {% endif %}
                             <div>
                                 <label>Days of Week</label>
                                 <div class="form-group" role="group" aria-label="Basic checkbox toggle button group">

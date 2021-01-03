@@ -58,11 +58,19 @@ def meal_planner(request):
                 if is_dinner_recipe(recipe["name"]):
                     recipes.append(recipe)
 
-            days_to_recipes = [(days_of_week[i], recipes[i]) for i in range(num_meals)]  # array of (day, recipe) tuples
+            message = None
+            if len(recipes) < num_meals:
+                print("Number of recipes found (" + str(len(
+                    recipes)) + ") was less than the number requested (" + str(num_meals) + ")")
+                message = "Oh no! We couldn't find enough recipes for your search."
+
+            # array of (day, recipe) tuples
+            days_to_recipes = [(days_of_week[i], recipes[i]) for i in range(min(num_meals, len(recipes)))]
 
             return render(request, "meal_planner/meal_planner.html",
                           context={"state": "show_results", "options_form": options_form,
-                                   "days_to_recipes": days_to_recipes})
+                                   "days_to_recipes": days_to_recipes, "error": message})
 
         return render(request, "meal_planner/meal_planner.html",
-                      context={"state": "no_results", "options_form": options_form})
+                      context={"state": "no_results", "options_form": options_form,
+                               "error": options_form.errors.get("__all__")})

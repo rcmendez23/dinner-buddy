@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import ValidationError
 
 
 class OptionsForm(forms.Form):
@@ -25,3 +26,10 @@ class OptionsForm(forms.Form):
                                            widget=forms.TextInput(attrs={'class': 'form-input'}))
     ingredients_excluded = forms.CharField(label='Ingredients Excluded', max_length=1000, required=False,
                                            widget=forms.TextInput(attrs={'class': 'form-input'}))
+
+    def clean(self):
+        cleaned_data = super().clean()
+        days_of_week = cleaned_data.get("days_of_week")
+
+        if not days_of_week:
+            raise ValidationError("Please select at least one day of the week!")
