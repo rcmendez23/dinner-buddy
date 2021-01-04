@@ -1,5 +1,5 @@
 # dinner-buddy
 
-By: Rebecca Mendez & Eshwari Bhide
+By: Rebecca Mendez
 
 An app to help you generate dinner ideas
